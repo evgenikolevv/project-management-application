@@ -25,7 +25,7 @@ Rest API for Project Management Application.
 - Lombok
 - JWT
 
-## Instalation
+## Installation
 
 1. Download the code from the repository.
 2. Install MySQL and MySQL workbench.
