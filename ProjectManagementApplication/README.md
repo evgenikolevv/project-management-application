@@ -1,4 +1,3 @@
-# Midterm 2
 
 ### Project Management Application
 
