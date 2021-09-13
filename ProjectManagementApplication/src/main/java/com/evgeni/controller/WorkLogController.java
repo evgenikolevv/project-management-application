@@ -20,51 +20,27 @@ public class WorkLogController {
 
     @GetMapping(path = "{workLogId}")
     public WorkLogDto findById(@PathVariable("workLogId") Long id) {
-        try {
-            return workLogService.findById(id);
-        } catch (WorkLogNotFoundException e) {
-            throw new WorkLogNotFoundException("Worklog with id :" + id + " is not found.");
-        }
+        return workLogService.findById(id);
     }
 
     @GetMapping(path = "/all/{taskId}")
     public List<WorkLogDto> findAllByProjectId(@PathVariable("taskId") Long taskId) {
-        try {
-            return workLogService.findAllByTaskId(taskId);
-        } catch (WorkLogNotFoundException e) {
-            throw new WorkLogNotFoundException("There are no worklogs.");
-        }
+        return workLogService.findAllByTaskId(taskId);
     }
 
     @PostMapping
     public WorkLogDto save(@Valid @RequestBody WorkLogDto workLogDto) {
-        try {
-            return workLogService.save(workLogDto);
-        } catch (IllegalArgumentException e) {
-            throw new IllegalArgumentException("Worklog fields must be valid.");
-        } catch (UserNotFoundException e) {
-            throw new UserNotFoundException("User with id :" + workLogDto.getCreatorId() + " is not found.");
-        } catch (TaskNotFoundException e) {
-            throw new TaskNotFoundException("Task with id :" + workLogDto.getTaskId() + " is not found.");
-        }
+        return workLogService.save(workLogDto);
     }
 
     @PutMapping(path = "{workLogId}")
     public WorkLogDto update(@PathVariable("workLogId") Long id, @Valid @RequestBody WorkLogDto workLogDto) {
-        try {
-            return workLogService.update(id, workLogDto);
-        } catch (WorkLogNotFoundException e) {
-            throw new WorkLogNotFoundException("Worklog with id :" + id + " is not found.");
-        }
+        return workLogService.update(id, workLogDto);
     }
 
     @DeleteMapping(path = "{workLogId}")
     public void delete(@PathVariable("workLogId") Long id) {
-        try {
-            workLogService.delete(id);
-        } catch (WorkLogNotFoundException e) {
-            throw new WorkLogNotFoundException("Worklog with id :" + id + " is not found.");
-        }
+        workLogService.delete(id);
     }
 }
 

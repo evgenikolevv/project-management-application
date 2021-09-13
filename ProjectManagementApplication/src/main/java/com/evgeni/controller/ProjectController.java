@@ -18,74 +18,42 @@ public class ProjectController {
 
     @GetMapping(path = "{projectId}")
     public ProjectDto findById(@PathVariable("projectId") Long id) {
-        try {
-            return projectService.findById(id);
-        } catch (ProjectNotFoundException e) {
-            throw new ProjectNotFoundException("Project with id: " + id + " is not found.");
-        }
+        return projectService.findById(id);
     }
 
     @GetMapping(path = "/all/{creatorId}")
     public List<ProjectDto> findAllByCreatorId(@PathVariable("creatorId") Long id) {
-        try {
-            return projectService.findAllByUserId(id);
-        } catch (Exception e) {
-            throw new ProjectNotFoundException("You don't own any projects.");
-        }
+        return projectService.findAllByUserId(id);
     }
 
     @GetMapping(path = "/assigned/{userId}")
     public List<ProjectDto> findAllAssignedByUserId(@PathVariable("userId") Long id) {
-        try {
-            return projectService.findAllAssignedByUserId(id);
-        } catch (Exception e) {
-            throw new ProjectNotFoundException("There are no assigned projects.");
-        }
+        return projectService.findAllAssignedByUserId(id);
     }
 
     @PostMapping
     public ProjectDto save(@Valid @RequestBody ProjectDto projectDto) {
-        try {
-            return projectService.save(projectDto);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("Project fields must be valid.");
-        }
+        return projectService.save(projectDto);
     }
 
     @PutMapping(path = "{projectId}")
     public ProjectDto update(@PathVariable("projectId") Long id, @Valid @RequestBody ProjectDto projectDto) {
-        try {
-            return projectService.update(id, projectDto);
-        } catch (ProjectNotFoundException e) {
-            throw new ProjectNotFoundException("Project with id: " + id + " is not found.");
-        }
+        return projectService.update(id, projectDto);
     }
 
     @DeleteMapping(path = "{projectId}")
     public void delete(@PathVariable("projectId") Long id) {
-        try {
-            projectService.delete(id);
-        } catch (ProjectNotFoundException e) {
-            throw new ProjectNotFoundException("Project with id: " + id + " is not found.");
-        }
+        projectService.delete(id);
     }
 
     @PostMapping("/assign")
     public void assign(@RequestParam Long teamId, @RequestParam Long projectId) {
-        try {
-            projectService.assign(teamId, projectId);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("team with id: " + teamId + " is already assigned to project with id: " + projectId);
-        }
+        projectService.assign(teamId, projectId);
     }
 
     @DeleteMapping("/unassign")
     public void unassign(Long teamId, Long projectId) {
-        try {
-            projectService.unassign(teamId, projectId);
-        } catch (Exception e) {
-            throw new IllegalArgumentException("team with id: " + teamId + " is not assigned to project with id: " + projectId);
-        }
+        projectService.unassign(teamId, projectId);
     }
 }
 
